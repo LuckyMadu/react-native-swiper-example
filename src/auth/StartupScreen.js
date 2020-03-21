@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  Dimensions,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import {IMAGE} from '../constants/images';
@@ -34,16 +35,31 @@ export class StartupScreen extends Component {
         </View>
         <View style={styles.slide3}>
           <Image source={IMAGE.STARTUP} style={styles.image} />
-          <Text style={styles.text}>And simple</Text>
+          <Text style={styles.text}>Go and see what you want!</Text>
           <Text style={styles.smallText}>Welcome to eSmartEdge App</Text>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity style={styles.buttonOne}>
+              <Text style={styles.buttonOneText}>SignUp</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonTwo}>
+              <Text style={styles.buttonTwoText}>Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Swiper>
     );
   }
 }
 
+const {width, height} = Dimensions.get('screen');
+const width_button = width * 0.3;
+
 const styles = StyleSheet.create({
   wrapper: {},
+  image: {
+    width: '100%',
+    height: 340,
+  },
   slide1: {
     flex: 1,
     justifyContent: 'center',
@@ -66,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 3,
     color: '#3465d9',
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
     marginHorizontal: 16,
@@ -77,9 +93,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 16,
   },
-  image: {
-    width: '100%',
-    height: 340,
+
+  buttonWrapper: {
+    flexDirection: 'row',
   },
   dot: {
     backgroundColor: 'rgba(52,101,217,.4)',
@@ -96,5 +112,33 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 5,
     marginVertical: 3,
+  },
+  buttonOne: {
+    width: width_button,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#3465d9',
+    borderRadius: 50,
+    marginTop: 15,
+  },
+  buttonOneText: {
+    color: '#3465d9',
+    fontSize: 16,
+  },
+  buttonTwo: {
+    width: width_button,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3465d9',
+    borderRadius: 50,
+    marginTop: 15,
+    marginLeft: 10,
+  },
+  buttonTwoText: {
+    color: '#FFFFFF',
+    fontSize: 16,
   },
 });

@@ -10,15 +10,42 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import {IMAGE} from '../constants/images';
+import * as Animatable from 'react-native-animatable';
 
 export class StartupScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animation_signup: null,
+      animation_login: null,
+      isShow: false,
+    };
+  }
+
+  onIndexChanged = index => {
+    if (index === 2) {
+      this.setState({
+        animation_signup: 'bounceInLeft',
+        animation_login: 'bounceInRight',
+        isShow: true,
+      });
+    } else {
+      this.setState({
+        animation_signup: null,
+        animation_login: null,
+        isShow: false,
+      });
+    }
+  };
   render() {
+    const {animation_login, animation_signup, isShow} = this.state;
     return (
       <Swiper
         style={styles.wrapper}
         showsButtons={true}
         dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}>
+        activeDot={<View style={styles.activeDot} />}
+        onIndexChanged={index => this.onIndexChanged(index)}>
         <View style={styles.slide1}>
           <Image source={IMAGE.STARTUP} style={styles.image} />
           <Text style={styles.text}>Welcome to eSmartEdge</Text>
@@ -37,14 +64,33 @@ export class StartupScreen extends Component {
           <Image source={IMAGE.STARTUP} style={styles.image} />
           <Text style={styles.text}>Go and see what you want!</Text>
           <Text style={styles.smallText}>Welcome to eSmartEdge App</Text>
-          <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.buttonOne}>
-              <Text style={styles.buttonOneText}>SignUp</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonTwo}>
-              <Text style={styles.buttonTwoText}>Login</Text>
-            </TouchableOpacity>
-          </View>
+          {isShow ? (
+            <View style={styles.buttonWrapper}>
+              <Animatable.View
+                animation={animation_signup}
+                delay={0}
+                duration={1500}
+                useNativeDriver>
+                <TouchableOpacity
+                  style={styles.buttonOne}
+                  onPress={() => this.props.navigation.navigate('Register')}>
+                  <Text style={styles.buttonOneText}>SignUp</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+
+              <Animatable.View
+                animation={animation_login}
+                delay={0}
+                duration={1500}
+                useNativeDriver>
+                <TouchableOpacity
+                  style={styles.buttonTwo}
+                  onPress={() => this.props.navigation.navigate('Login')}>
+                  <Text style={styles.buttonTwoText}>Login</Text>
+                </TouchableOpacity>
+              </Animatable.View>
+            </View>
+          ) : null}
         </View>
       </Swiper>
     );

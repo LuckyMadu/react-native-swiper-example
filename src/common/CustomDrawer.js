@@ -30,7 +30,7 @@ export class CustomDrawer extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Login')}>
+            onPress={() => this.props.navigation.navigate('Startup')}>
             <Text>LogOut</Text>
           </TouchableOpacity>
         </ScrollView>

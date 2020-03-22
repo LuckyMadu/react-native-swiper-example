@@ -18,6 +18,7 @@ import {
 import {NotificationScreen} from './src/drawer';
 import {LoginScreen, RegisterScreen, StartupScreen} from './src/auth';
 import {IMAGE} from './src/constants/images';
+import {LoginTwoScreen} from './src/auth/LoginTwoScreen';
 
 const StackHome = createStackNavigator();
 const StackSetting = createStackNavigator();
@@ -113,7 +114,7 @@ const StackApp = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StackApp.Navigator initialRouteName="Startup">
+      <StackApp.Navigator initialRouteName="LoginTwo">
         <StackApp.Screen
           name="HomeApp"
           component={DrawerNavigator}
@@ -127,6 +128,11 @@ export default function App() {
         <StackApp.Screen
           name="Login"
           component={LoginScreen}
+          options={navOptionHandler}
+        />
+        <StackApp.Screen
+          name="LoginTwo"
+          component={LoginTwoScreen}
           options={navOptionHandler}
         />
         <StackApp.Screen
